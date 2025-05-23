@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trendy Tees Shop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .cart { display: none; }
+    .cart.open { display: block; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-white shadow">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-xl font-bold">Trendy Tees</a>
+      <nav class="space-x-4 hidden md:flex">
+        <a href="/" class="hover:text-blue-500">Home</a>
+        <a href="#products" class="hover:text-blue-500">Products</a>
+        <a href="#chart" class="hover:text-blue-500">Chart</a>
+        <a href="#orders" class="hover:text-blue-500">Orders</a>
+        <a href="#payment" class="hover:text-blue-500">Payment</a>
+        <button id="viewCartBtn" class="hover:text-blue-500">Cart 🛒</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-blue-200 py-16 text-center">
+    <h1 class="text-4xl font-bold mb-4">Trendy Tees for Everyone</h1>
+    <p class="text-lg">Style meets comfort – find your perfect tee today!</p>
+  </section>
+
+  <!-- Product Listing -->
+  <section id="products" class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">Our Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition" data-name="Classic Tee" data-price="15">
+        <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSy6a1Zsy67s7OfxrxdDLAKwW9tDsQZWoKlmQxDHXvomlhPHMFbKkbhswR6byVoGfpmZFIRXkK7REu4wswjNpWjh-CgH4Zs6l0GXxtwC0K64m5X8zO4IqjBtQ" alt="Classic Tee" class="mb-2 w-full h-48 object-cover">
+        <h3 class="font-semibold">Classic Tee</h3>
+        <p class="text-gray-600">$15</p>
+        <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded addToCart">Add to Cart</button>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition" data-name="Graphic Tee" data-price="20">
+        <img src="https://img.clevup.in/352617/trendy-partywear-women-tshirts-1707737736221_SKU-1738_0.jpg?width=600&format=webp" alt="Graphic Tee" class="mb-2 w-full h-48 object-cover">
+        <h3 class="font-semibold">Graphic Tee</h3>
+        <p class="text-gray-600">$20</p>
+        <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded addToCart">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+    <!-- Orders Section -->
+  <section id="orders" class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">Recent Orders (Dummy)</h2>
+    <div class="bg-white rounded shadow p-6 overflow-x-auto">
+      <table class="table-auto w-full">
+        <thead>
+          <tr class="bg-gray-100 text-left">
+            <th class="px-4 py-2">Order ID</th>
+            <th class="px-4 py-2">Product</th>
+            <th class="px-4 py-2">Date</th>
+            <th class="px-4 py-2">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border px-4 py-2">#1234</td>
+            <td class="border px-4 py-2">Classic Tee</td>
+            <td class="border px-4 py-2">2025-05-21</td>
+            <td class="border px-4 py-2">Shipped</td>
+          </tr>
+          <tr>
+            <td class="border px-4 py-2">#1235</td>
+            <td class="border px-4 py-2">Graphic Tee</td>
+            <td class="border px-4 py-2">2025-05-20</td>
+            <td class="border px-4 py-2">Processing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section id="payment" class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">Payment Options (Dummy)</h2>
+    <div class="bg-white rounded shadow p-6">
+      <p>Select your preferred payment method (non-functional prototype):</p>
+      <form class="mt-4 space-y-4">
+        <label class="block">
+          <input type="radio" name="payment" class="mr-2"> Credit Card
+        </label>
+        <label class="block">
+          <input type="radio" name="payment" class="mr-2"> PayPal
+        </label>
+        <label class="block">
+          <input type="radio" name="payment" class="mr-2"> Cash on Delivery
+        </label>
+        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Proceed to Pay</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Cart Section (Page Content) -->
+  <section id="cart-section" class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">Your Cart (View Only)</h2>
+    <div class="bg-white rounded shadow p-6">
+      <ul id="cartSectionItems" class="space-y-2"></ul>
+      <p class="mt-4 font-semibold">Total: $<span id="cartSectionTotal">0</span></p>
+    </div>
+  </section>
+
+  <!-- Cart Sidebar -->
+  <div id="cart" class="fixed right-0 top-0 w-80 h-full bg-white shadow-lg p-6 cart z-50 overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+    <ul id="cartItems" class="space-y-2"></ul>
+    <p class="mt-4 font-semibold">Total: $<span id="total">0</span></p>
+    <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded">Checkout</button>
+    <button class="mt-2 text-red-500" onclick="toggleCart()">Close</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-200 mt-12 p-6 text-center text-sm">
+    <p>© 2025 Trendy Tees</p>
+    <div class="mt-2 space-x-2">
+      <a href="#" class="hover:underline">About</a>
+      <a href="#" class="hover:underline">Contact</a>
+      <a href="#" class="hover:underline">Terms</a>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-4 right-4 bg-blue-500 text-white p-2 rounded-full shadow">↑</button>
+
+  <!-- JS Cart Logic -->
+  <script>
+    const cart = [];
+
+    function toggleCart() {
+      document.getElementById('cart').classList.toggle('open');
+    }
+
+    document.getElementById('viewCartBtn').addEventListener('click', toggleCart);
+
+    document.querySelectorAll('.addToCart').forEach(button => {
+      button.addEventListener('click', function () {
+        const card = this.parentElement;
+        const name = card.getAttribute('data-name');
+        const price = parseFloat(card.getAttribute('data-price'));
+        cart.push({ name, price });
+        updateCart();
+      });
+    });
+
+    function updateCart() {
+      const cartList = document.getElementById('cartItems');
+      const totalDisplay = document.getElementById('total');
+      cartList.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const li = document.createElement('li');
+        li.className = 'flex justify-between items-center';
+        li.innerHTML = `${item.name} - $${item.price} <button onclick="removeFromCart(${index})" class="text-red-500">Remove</button>`;
+        cartList.appendChild(li);
+      });
+      totalDisplay.textContent = total.toFixed(2);
+      updateCartSection();
+    }
+
+    function updateCartSection() {
+      const cartSectionList = document.getElementById('cartSectionItems');
+      const cartSectionTotal = document.getElementById('cartSectionTotal');
+      if (!cartSectionList || !cartSectionTotal) return;
+
+      cartSectionList.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price;
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - $${item.price}`;
+        cartSectionList.appendChild(li);
+      });
+      cartSectionTotal.textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+  </script>
+</body>
+</html>
